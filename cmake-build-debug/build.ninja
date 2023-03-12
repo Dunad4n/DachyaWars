@@ -56,10 +56,17 @@ build CMakeFiles\Task_2.dir\main.cpp.obj: CXX_COMPILER__Task_2_Debug D$:\CLionPr
   TARGET_COMPILE_PDB = CMakeFiles\Task_2.dir\
   TARGET_PDB = Task_2.pdb
 
-build CMakeFiles\Task_2.dir\Entities\Farmer.cpp.obj: CXX_COMPILER__Task_2_Debug D$:\CLionProjects\Sem$ 6\Task_2\Entities\Farmer.cpp || cmake_object_order_depends_target_Task_2
+build CMakeFiles\Task_2.dir\Entities\Playable\Farmer.cpp.obj: CXX_COMPILER__Task_2_Debug D$:\CLionProjects\Sem$ 6\Task_2\Entities\Playable\Farmer.cpp || cmake_object_order_depends_target_Task_2
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
   OBJECT_DIR = CMakeFiles\Task_2.dir
-  OBJECT_FILE_DIR = CMakeFiles\Task_2.dir\Entities
+  OBJECT_FILE_DIR = CMakeFiles\Task_2.dir\Entities\Playable
+  TARGET_COMPILE_PDB = CMakeFiles\Task_2.dir\
+  TARGET_PDB = Task_2.pdb
+
+build CMakeFiles\Task_2.dir\Entities\Playable\Mole.cpp.obj: CXX_COMPILER__Task_2_Debug D$:\CLionProjects\Sem$ 6\Task_2\Entities\Playable\Mole.cpp || cmake_object_order_depends_target_Task_2
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
+  OBJECT_DIR = CMakeFiles\Task_2.dir
+  OBJECT_FILE_DIR = CMakeFiles\Task_2.dir\Entities\Playable
   TARGET_COMPILE_PDB = CMakeFiles\Task_2.dir\
   TARGET_PDB = Task_2.pdb
 
@@ -67,13 +74,6 @@ build CMakeFiles\Task_2.dir\Utils\Vector2.cpp.obj: CXX_COMPILER__Task_2_Debug D$
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
   OBJECT_DIR = CMakeFiles\Task_2.dir
   OBJECT_FILE_DIR = CMakeFiles\Task_2.dir\Utils
-  TARGET_COMPILE_PDB = CMakeFiles\Task_2.dir\
-  TARGET_PDB = Task_2.pdb
-
-build CMakeFiles\Task_2.dir\Entities\Mole.cpp.obj: CXX_COMPILER__Task_2_Debug D$:\CLionProjects\Sem$ 6\Task_2\Entities\Mole.cpp || cmake_object_order_depends_target_Task_2
-  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd -std:c++17
-  OBJECT_DIR = CMakeFiles\Task_2.dir
-  OBJECT_FILE_DIR = CMakeFiles\Task_2.dir\Entities
   TARGET_COMPILE_PDB = CMakeFiles\Task_2.dir\
   TARGET_PDB = Task_2.pdb
 
@@ -85,7 +85,7 @@ build CMakeFiles\Task_2.dir\Entities\Mole.cpp.obj: CXX_COMPILER__Task_2_Debug D$
 #############################################
 # Link the executable Task_2.exe
 
-build Task_2.exe: CXX_EXECUTABLE_LINKER__Task_2_Debug CMakeFiles\Task_2.dir\main.cpp.obj CMakeFiles\Task_2.dir\Entities\Farmer.cpp.obj CMakeFiles\Task_2.dir\Utils\Vector2.cpp.obj CMakeFiles\Task_2.dir\Entities\Mole.cpp.obj
+build Task_2.exe: CXX_EXECUTABLE_LINKER__Task_2_Debug CMakeFiles\Task_2.dir\main.cpp.obj CMakeFiles\Task_2.dir\Entities\Playable\Farmer.cpp.obj CMakeFiles\Task_2.dir\Entities\Playable\Mole.cpp.obj CMakeFiles\Task_2.dir\Utils\Vector2.cpp.obj
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

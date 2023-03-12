@@ -7,8 +7,6 @@
 namespace entity
 {
 
-Farmer::Farmer() {}
-
 Farmer::Farmer(const int speed, const int hitRadius, const utils::Vector2 &location)
 {
     this->speed = speed;

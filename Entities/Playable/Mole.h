@@ -2,7 +2,7 @@
 #ifndef TASK_2_MOLE_H
 #define TASK_2_MOLE_H
 
-#include "Character.h"
+#include "../Character.h"
 
 namespace entity
 {

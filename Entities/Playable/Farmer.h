@@ -2,8 +2,8 @@
 #ifndef TASK_2_FARMER_H
 #define TASK_2_FARMER_H
 
-#include "Character.h"
-#include "../Utils/Vector2.h"
+#include "../Character.h"
+#include "../../Utils/Vector2.h"
 
 namespace entity
 {

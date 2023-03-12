@@ -1,0 +1,8 @@
+# ninja log v5
+19	518	7003356122105813	CMakeFiles/Task_2.dir/Utils/Vector2.cpp.obj	5c76a2c2ff094017
+472	1048	7003356548036829	Task_2.exe	1d51b12a5828a0a9
+26	523	7003356122157948	CMakeFiles/Task_2.dir/Entities/Playable/Mole.cpp.obj	4283b38701d9a420
+1	1334	7003356130232588	CMakeFiles/Task_2.dir/main.cpp.obj	62bec8132263480c
+1	471	7003356542422498	CMakeFiles/Task_2.dir/Entities/Playable/Farmer.cpp.obj	c8f8bef06d582d2e
+1	166	7003357019919995	CMakeFiles/Task_2.dir/Utils/Vector2.cpp.obj	5c76a2c2ff094017
+167	467	7003357022530233	Task_2.exe	1d51b12a5828a0a9
