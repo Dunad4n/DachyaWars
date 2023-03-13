@@ -50,18 +50,18 @@ The CXX compiler identification is MSVC, found in "D:/CLionProjects/Sem 6/Task_2
 Detecting C compiler ABI info compiled with the following output:
 Change Dir: D:/CLionProjects/Sem 6/Task_2/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Users/sosis/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/ninja/win/x64/ninja.exe cmTC_1a96e && [1/2] Building C object CMakeFiles\cmTC_1a96e.dir\CMakeCCompilerABI.c.obj
+Run Build Command(s):C:/Users/sosis/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/ninja/win/x64/ninja.exe cmTC_8a2f8 && [1/2] Building C object CMakeFiles\cmTC_8a2f8.dir\CMakeCCompilerABI.c.obj
 Примечание: включение файла:  C:\Users\sosis\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8617.54\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCompilerABI.h
-[2/2] Linking C executable cmTC_1a96e.exe
+[2/2] Linking C executable cmTC_8a2f8.exe
 
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: D:/CLionProjects/Sem 6/Task_2/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Users/sosis/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/ninja/win/x64/ninja.exe cmTC_d5d9b && [1/2] Building CXX object CMakeFiles\cmTC_d5d9b.dir\CMakeCXXCompilerABI.cpp.obj
+Run Build Command(s):C:/Users/sosis/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/bin/ninja/win/x64/ninja.exe cmTC_28f41 && [1/2] Building CXX object CMakeFiles\cmTC_28f41.dir\CMakeCXXCompilerABI.cpp.obj
 Примечание: включение файла:  C:\Users\sosis\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.8617.54\bin\cmake\win\x64\share\cmake-3.24\Modules\CMakeCompilerABI.h
-[2/2] Linking CXX executable cmTC_d5d9b.exe
+[2/2] Linking CXX executable cmTC_28f41.exe
 
 
 

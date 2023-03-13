@@ -3,6 +3,7 @@
 #define TASK_2_MOLE_H
 
 #include "../Character.h"
+#include "../../Utils/Vector2.h"
 
 namespace entity
 {
@@ -12,22 +13,33 @@ enum MoleGender
     Female
 };
 
-class Mole :public Character
+class Mole
 {
 public:
     Mole() = default;
-    Mole(MoleGender gender);
+    Mole(MoleGender gender, utils::Vector2 *location);
+
+    ~Mole();
 
 public:
-    const MoleGender getGender() const;
-    const bool isUnderGround() const;
+    const utils::Vector2 *getLocation();
+    void setLocation(utils::Vector2 *location);
 
+    const MoleGender getGender() const;
     void setGender(MoleGender gender);
+
+    const bool isUnderGround() const;
     void setUnderGround(const bool underGround);
 
 private:
+    void createLocation();
+
+private:
+    utils::Vector2 *location;
     MoleGender gender;
     bool underGround = true;
+
+
 };
 
 } // entity

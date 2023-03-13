@@ -18,6 +18,8 @@ public:
     Vector2();
     Vector2(const int x, const int y);
 
+    ~Vector2();
+
 public:
     const int getX() const;
     const int getY() const;

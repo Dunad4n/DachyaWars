@@ -4,43 +4,44 @@
 
 #include "Farmer.h"
 
-namespace entity
-{
-
-Farmer::Farmer(const int speed, const int hitRadius, const utils::Vector2 &location)
+entity::Farmer::Farmer(const int speed, const int hitRadius, utils::Vector2  *location)
 {
     this->speed = speed;
     this->hitRadius = hitRadius;
     this->location = location;
 }
 
-const int Farmer::getSpeed() const
+entity::Farmer::~Farmer()
+{
+    delete location;
+}
+
+const int entity::Farmer::getSpeed() const
 {
     return this->speed;
 }
 
-void Farmer::setSpeed(const int speed)
+void entity::Farmer::setSpeed(const int speed)
 {
     this->speed = speed;
 }
 
-const int Farmer::getHitRadius() const
+const int entity::Farmer::getHitRadius() const
 {
     return this->hitRadius;
 }
 
-void Farmer::setHitRadius(const int hitRadius)
+void entity::Farmer::setHitRadius(const int hitRadius)
 {
     this->hitRadius = hitRadius;
 }
 
-const utils::Vector2& Farmer::getLocation()
+const utils::Vector2* entity::Farmer::getLocation()
 {
     return location;
 }
 
-void Farmer::setLocation(const utils::Vector2 &location)
+void entity::Farmer::setLocation(utils::Vector2 *location)
 {
     this->location = location;
-}
 }

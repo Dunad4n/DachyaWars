@@ -4,32 +4,43 @@
 
 #include "Mole.h"
 
-namespace entity
-{
-Mole::Mole(MoleGender gender)
+entity::Mole::Mole(entity::MoleGender gender, utils::Vector2 *location)
 {
     this->gender = gender;
+    this->location = location;
 }
 
-const MoleGender Mole::getGender() const
+entity::Mole::~Mole() {}
+
+const entity::MoleGender entity::Mole::getGender() const
 {
     return this->gender;
 }
 
-void Mole::setGender(MoleGender gender)
+void entity::Mole::setGender(entity::MoleGender gender)
 {
     this->gender = gender;
 }
 
-const bool Mole::isUnderGround() const
+const bool entity::Mole::isUnderGround() const
 {
     return this->underGround;
 }
 
-void Mole::setUnderGround(const bool underGround)
+void entity::Mole::setUnderGround(const bool underGround)
 {
     this->underGround = underGround;
 }
 
+const utils::Vector2 *entity::Mole::getLocation()
+{
+    return location;
+}
 
-} // entity
+void entity::Mole::setLocation(utils::Vector2 *location)
+{
+    this->location = location;
+}
+
+
+// entity
