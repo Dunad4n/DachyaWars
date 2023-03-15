@@ -14,6 +14,6 @@ set(Entities
 set(Utils
         Utils/Vector2.cpp
         Utils/Vector2.h
-        Utils/Painter.cpp Utils/Painter.h)
+        Utils/Painter.cpp Utils/Painter.h Utils/Randomer.cpp Utils/Randomer.h)
 
 add_executable(Task_2 main.cpp ${Entities} ${Utils} Game.cpp Game.h GameField.cpp GameField.h)

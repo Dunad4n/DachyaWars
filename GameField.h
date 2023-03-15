@@ -4,8 +4,7 @@
 
 #include "Utils/Vector2.h"
 
-namespace game
-{
+
 class GameField
 {
 public:
@@ -20,8 +19,10 @@ public:
     void setField(int **field);
     void setField(int x, int y);
 
-    const utils::Vector2 *getSize();
-    void setSize(utils::Vector2 *size);
+    const Vector2 *getSize();
+    void setSize(Vector2 *size);
+    bool tileIsAlive(Vector2 &tile);
+    void kill(Vector2 &tile);
 
 private:
     void createField(int x, int y);
@@ -29,9 +30,9 @@ private:
 
 private:
     int **field;
-    utils::Vector2 *size;
+    Vector2 *size;
 };
-}
+
 
 
 #endif //TASK_2_GAMEFIELD_H

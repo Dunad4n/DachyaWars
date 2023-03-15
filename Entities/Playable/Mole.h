@@ -4,44 +4,66 @@
 
 #include "../Character.h"
 #include "../../Utils/Vector2.h"
+#include "../../Game.h"
 
-namespace entity
-{
+
 enum MoleGender
 {
     Male,
     Female
 };
 
-class Mole
+enum MoleStatus
+{
+    OnTheGround,
+    UnderGround,
+    Attacked,
+    Rest
+};
+
+class Game;
+
+class Mole :public Character
 {
 public:
     Mole() = default;
-    Mole(MoleGender gender, utils::Vector2 *location);
+    Mole(MoleGender gender, Vector2 *location, Game *game);
 
     ~Mole();
 
 public:
-    const utils::Vector2 *getLocation();
-    void setLocation(utils::Vector2 *location);
+    Vector2 *getLocation();
+    void setLocation(Vector2 *location);
 
     const MoleGender getGender() const;
     void setGender(MoleGender gender);
 
-    const bool isUnderGround() const;
-    void setUnderGround(const bool underGround);
+    MoleStatus getStatus();
+    void setStatus(MoleStatus status);
+
+    bool isUnderGround();
+    bool isOnTheGround();
+    bool isAttacked();
+    bool isMan();
+    bool isWoman();
+    bool isRest();
+
+    void execAction();
+private:
+    Vector2* chooseTile();
+    std::vector<Vector2*>& getTilesAround(std::vector<Vector2*> &tiles);
+    void filterTiles(std::vector<Vector2*> &tiles);
+    void filterTilesForAttack(std::vector<Vector2*> &tiles);
+    void reProduct();
+
+    void move() override;
+    void attack() override;
 
 private:
-    void createLocation();
-
-private:
-    utils::Vector2 *location;
+    Vector2 *location;
     MoleGender gender;
-    bool underGround = true;
-
-
+    MoleStatus status = UnderGround;
+    Game *game;
 };
-
-} // entity
 
 #endif //TASK_2_MOLE_H

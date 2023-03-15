@@ -2,7 +2,7 @@
 #include "Game.h"
 
 int main() {
-    game::Game *game = new game::Game();
+    Game *game = new Game();
     game->run();
     delete game;
     return 0;

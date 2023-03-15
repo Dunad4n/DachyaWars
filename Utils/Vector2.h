@@ -5,8 +5,6 @@
 #ifndef TASK_2_VECTOR2_H
 #define TASK_2_VECTOR2_H
 
-namespace utils
-{
 
 class Vector2
 {
@@ -21,13 +19,25 @@ public:
     ~Vector2();
 
 public:
-    const int getX() const;
-    const int getY() const;
+    bool operator == (Vector2 *v1)
+    {
+        return x == v1->x && y == v1->y;
+    };
 
+    Vector2 *operator - (Vector2 *v1)
+    {
+        return new Vector2(x - v1->x, y - v1->y);
+    }
+
+public:
+    const int getX() const;
     void setX(const int x);
+
+    const int getY() const;
     void setY(const int y);
+
+    void setXY(int x, int y);
 };
 
-} // utils
 
 #endif //TASK_2_VECTOR2_H

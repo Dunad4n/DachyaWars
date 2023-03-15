@@ -4,14 +4,23 @@
 
 #include "../Character.h"
 #include "../../Utils/Vector2.h"
+#include "../../Game.h"
+#include <vector>
 
-namespace entity
-{
-class Farmer
+
+class Game;
+
+//enum FarmerStatus
+//{
+//    Moving,
+//    AfterAttack
+//};
+
+class Farmer :public Character
 {
 public:
     Farmer() = default;
-    Farmer(const int speed, const int hitRadius, utils::Vector2 *location);
+    Farmer(const int speed, const int hitRadius, Vector2 *location, Game *game);
 
     ~Farmer();
 
@@ -22,16 +31,30 @@ public:
     const int getHitRadius() const;
     void setHitRadius(const int hitRadius);
 
-    const utils::Vector2* getLocation();
-    void setLocation(utils::Vector2 *location);
+    const Vector2 *getLocation();
+    void setLocation(Vector2 *location);
+
+    const Vector2 *getGoalLocation();
+    void setGoalLocation(Vector2 *goalLocation);
+
+    void sortMoles(std::vector<Vector2*> &deltas);
+
+    void execAction();
+
+private:
+    void findClosestMole();
+    void move() override;
+    void attack() override;
 
 private:
     int speed;
     int hitRadius;
-    utils::Vector2 *location;
+    Vector2 *location;
+    Vector2 *goalLocation = nullptr;
 
+    Game *game;
 };
-}
+
 
 
 #endif //TASK_2_FARMER_H

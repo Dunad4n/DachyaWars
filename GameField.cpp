@@ -1,43 +1,43 @@
 
 #include "GameField.h"
 
-game::GameField::GameField(int x, int y)
+GameField::GameField(int x, int y)
 {
     createField(x, y);
-    size = new utils::Vector2(x, y);
+    size = new Vector2(x, y);
 }
 
-game::GameField::~GameField()
+GameField::~GameField()
 {
     deleteField();
 }
 
-int **game::GameField::getField()
+int **GameField::getField()
 {
     return field;
 }
 
-void game::GameField::setField(int **field)
+void GameField::setField(int **field)
 {
     this->field = field;
 }
 
-void game::GameField::setField(int x, int y)
+void GameField::setField(int x, int y)
 {
     createField(x, y);
 }
 
-const utils::Vector2 *game::GameField::getSize()
+const Vector2 *GameField::getSize()
 {
     return size;
 }
 
-void game::GameField::setSize(utils::Vector2 *size)
+void GameField::setSize(Vector2 *size)
 {
     this->size = size;
 }
 
-void game::GameField::createField(int x, int y)
+void GameField::createField(int x, int y)
 {
     field = new int *[x];
     for(int i = 0; i < x; ++i)
@@ -50,7 +50,7 @@ void game::GameField::createField(int x, int y)
     }
 }
 
-void game::GameField::deleteField()
+void GameField::deleteField()
 {
     for(int i = size->getX() - 1; i >= 0; --i)
     {
@@ -58,7 +58,7 @@ void game::GameField::deleteField()
     }
 }
 
-bool game::GameField::isClear()
+bool GameField::isClear()
 {
     for(int i = 0; i < size->getX(); ++i)
     {
@@ -71,4 +71,14 @@ bool game::GameField::isClear()
         }
     }
     return true;
+}
+
+bool GameField::tileIsAlive(Vector2 &tile)
+{
+    return field[tile.getX()][tile.getY()] == 1;
+}
+
+void GameField::kill(Vector2 &tile)
+{
+    field[tile.getX()][tile.getY()] = 0;
 }
