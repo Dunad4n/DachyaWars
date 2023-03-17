@@ -64,7 +64,7 @@ bool GameField::isClear()
     {
         for(int j = 0; j < size->getY(); ++j)
         {
-            if(field[i][j] == 1)
+            if(field[i][j])
             {
                 return false;
             }

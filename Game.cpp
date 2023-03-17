@@ -9,18 +9,21 @@
 
 Game::Game() {}
 
-Game::Game(GameField *gameField, Farmer *farmer , std::vector<Mole*> moles)
+Game::Game(GameField *gameField, std::vector<Character*> characters)
 {
     this->gameField = gameField;
-    this->farmer = farmer;
-    this->moles = moles;
+    this->characters = characters;
 }
 
 Game::~Game()
 {
     delete gameField;
-    delete farmer;
-//    delete moles;
+    for(int i = 0; i < characters.size(); ++i)
+    {
+        delete characters[i];
+    }
+    //delete randomer;
+//    delete characters;
 }
 
 GameField *Game::getGameField()
@@ -33,14 +36,14 @@ Randomer *Game::getRandomer()
     return randomer;
 }
 
-std::vector<Mole *> &Game::getMoles()
+std::vector<Character *> &Game::getCharacters()
 {
-    return moles;
+    return characters;
 }
 
 bool Game::molesAlive()
 {
-    return moles.size() != 0;
+    return characters.size() > 1;
 }
 
 void Game::run()
@@ -51,27 +54,28 @@ void Game::run()
     std::cout << "Input parameters for Farmer: speed, hit radius, location(x) and location(y)" << std::endl;
     int speed, hitRadius, locationX, locationY;
     std::cin >> speed >> hitRadius >> locationX >> locationY;
-    std::cout << "Input number of Male moles and Female moles" << std::endl;
+    std::cout << "Input number of Male characters and Female characters" << std::endl;
     int maleMole, femaleMole;
     std::cin >> maleMole >> femaleMole;
 
     gameField = new GameField(x, y);
-    farmer = new Farmer(speed, hitRadius, new Vector2(locationX, locationY), this);
+    characters.push_back(new Farmer(speed, hitRadius, new Vector2(locationX, locationY), this));
     createInitMoles(maleMole, femaleMole);
     Painter *painter = new Painter(x, y);
-    painter->paint(gameField, farmer, moles);
+    std::cout << "Start";
+    painter->paint(gameField, characters);
 
     while(!gameField->isClear() && molesAlive())
     {
         switch(gameStage)
         {
             case GameStage::FarmerTurn:
-                farmer->execAction();
-
+                characters[0]->execAction();
+                std::cout << "Farmer Turn";
                 gameStage = GameStage::MolesTurn;
                 break;
             case GameStage::MolesTurn:
-
+                std::cout << "Moles Turn";
                 execMolesAction();
                 //findTwoMolesInOneTile();
                 gameStage = GameStage::FarmerTurn;
@@ -80,9 +84,9 @@ void Game::run()
                 std::cout << "Incorrect game stage";
                 break;
         }
-        std::this_thread::sleep_for(std::chrono::nanoseconds(2000000000));
-        painter->paint(gameField, farmer, moles);
-        std::cout << moles.size() << std::endl;
+        std::this_thread::sleep_for(std::chrono::nanoseconds(500000000));
+        painter->paint(gameField, characters);
+        std::cout << characters.size() - 1 << std::endl;
     }
 
     delete painter;
@@ -90,26 +94,14 @@ void Game::run()
 
 void Game::createInitMoles(int maleMoles, int femaleMoles)
 {
-//    moles = new entity::Mole[maleMoles + femaleMoles];
-//    int number = 0;
-//    for(number = 0; number < maleMoles; ++number)
-//    {
-//        moles[number].setGender(entity::MoleGender::Male);
-//        moles[number].setLocation(createMoleLocation());
-//    }
-//    for(; number < maleMoles + femaleMoles; ++number)
-//    {
-//        moles[number].setGender(entity::MoleGender::Female);
-//        moles[number].setLocation(createMoleLocation());
-//    }
     int number;
     for(number = 0; number < maleMoles; ++number)
     {
-        moles.push_back(new Mole(MoleGender::Male, createMoleLocation(), this));
+        characters.push_back(new Mole(Gender::Male, createMoleLocation(), this));
     }
     for(; number < maleMoles + femaleMoles; ++number)
     {
-        moles.push_back(new Mole(MoleGender::Female, createMoleLocation(), this));
+        characters.push_back(new Mole(Gender::Female, createMoleLocation(), this));
     }
 }
 
@@ -122,70 +114,55 @@ Vector2* Game::createMoleLocation()
 
 void Game::execMolesAction()
 {
-    for(int i = 0; i < moles.size(); ++i)
+    for(int i = 1; i < characters.size(); ++i)
     {
-        moles[i]->execAction();
+        characters[i]->execAction();
     }
 }
 
-void Game::findTwoMolesInOneTile()
-{
-//    std::vector<Mole*> oneLocationMoles;
-    for(int i = 0; i < moles.size(); ++i)
-    {
-        if(moles[i]->isUnderGround())
-        {
-            for(int j = i + 1; j < moles.size(); ++j)
-            {
-                if(moles[j]->isUnderGround())
-                {
-                    if(moles[i]->getLocation()->operator==(moles[j]->getLocation())
-                       && moles[i]->getGender() != moles[j]->getGender())
-                    {
-//                        oneLocationMoles.push_back(moles[i]);
-//                        oneLocationMoles.push_back(moles[j]);
-                        moles[i]->setStatus(Rest);
-                        moles[j]->setStatus(Rest);
-                    }
-                }
-            }
-        }
-    }
-//    if(oneLocationMoles.size() > 0)
+//void Game::findTwoMolesInOneTile()
+//{
+//    for(int i = 0; i < characters.size(); ++i)
 //    {
-//        for(int i = 0; i < oneLocationMoles.size(); ++i)
+//        if(characters[i]->isUnderGround())
 //        {
-//            createNewMole(oneLocationMoles[i]->getLocation());
-//            oneLocationMoles[i]->setStatus(MoleStatus::Rest);
-//            oneLocationMoles[i + 1]->setStatus(MoleStatus::Rest);
-//            oneLocationMoles.erase(oneLocationMoles.begin() + i);
-//            oneLocationMoles.erase(oneLocationMoles.begin() + i);
-//            i--;
+//            for(int j = i + 1; j < characters.size(); ++j)
+//            {
+//                if(characters[j]->isUnderGround())
+//                {
+//                    if(*characters[i]->getLocation() == *(characters[j]->getLocation())
+//                       && characters[i]->getGender() != characters[j]->getGender())
+//                    {
+//                        characters[i]->setStatus(Rest);
+//                        characters[j]->setStatus(Rest);
+//                    }
+//                }
+//            }
 //        }
 //    }
-}
+//}
 
 void Game::createNewMole(Vector2 *location)
 {
     int gender = randomer->random(2);
     if(gender == 2)
     {
-        moles.push_back(new Mole(MoleGender::Female, new Vector2(location->getX(), location->getY()), this));
+        characters.push_back(new Mole(Gender::Female, new Vector2(location->getX(), location->getY()), this));
     }
     else
     {
-        moles.push_back(new Mole(MoleGender::Male, new Vector2(location->getX(), location->getY()), this));
+        characters.push_back(new Mole(Gender::Male, new Vector2(location->getX(), location->getY()), this));
     }
 }
 
 void Game::killMole(Vector2 *location)
 {
-    for(int i = 0; i < moles.size(); ++i)
+    for(int i = 1; i < characters.size(); ++i)
     {
-        if(moles[i]->getLocation()->operator==(location))
+        if(*characters[i]->getLocation() == *location)
         {
-            delete moles[i];
-            moles.erase(moles.begin() + i);
+            delete characters[i];
+            characters.erase(characters.begin() + i);
             break;
         }
     }

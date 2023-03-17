@@ -3,13 +3,37 @@
 #define TASK_2_CHARACTER_H
 
 
+#include "../Utils/Vector2.h"
+
+enum Gender
+{
+    Male,
+    Female
+};
+
+enum Status
+{
+    OnTheGround,
+    UnderGround,
+    Attacked,
+    Rest
+};
 
 class Character
 {
-private:
-    virtual void move() = 0;
-    virtual void attack() = 0;
+public:
+    virtual void execAction() = 0;
+    virtual Vector2* getLocation() = 0;
 
+    virtual Status getStatus() = 0;
+    virtual Gender getGender() = 0;
+
+    virtual void setStatus(Status status) = 0;
+    virtual void setGender(Gender gender) = 0;
+
+private:
+//    MoleStatus status = MoleStatus::UnderGround;
+//    MoleGender gender;
 };
 
 

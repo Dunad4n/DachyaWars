@@ -39,7 +39,7 @@ void Farmer::setHitRadius(const int hitRadius)
     this->hitRadius = hitRadius;
 }
 
-const Vector2* Farmer::getLocation()
+Vector2* Farmer::getLocation()
 {
     return location;
 }
@@ -71,21 +71,21 @@ void Farmer::execAction()
 void Farmer::findClosestMole()
 {
     std::vector<Vector2*> deltas;
-    for(int i = 0; i < game->getMoles().size(); ++i)
+    for(int i = 1; i < game->getCharacters().size(); ++i)
     {
-        if(game->getMoles()[i]->isUnderGround())
+        if(game->getCharacters()[i]->getStatus() == UnderGround)
         {
             continue;
         }
         deltas.push_back(new Vector2(
-                location->getX() - game->getMoles()[i]->getLocation()->getX(),
-                location->getY() - game->getMoles()[i]->getLocation()->getY())
+                location->getX() - game->getCharacters()[i]->getLocation()->getX(),
+                location->getY() - game->getCharacters()[i]->getLocation()->getY())
                 );
     }
     sortMoles(deltas);
     if(deltas.size() > 0)
     {
-        goalLocation = location->operator-(deltas[deltas.size() - 1]);
+        goalLocation = *location - *deltas[deltas.size() - 1];
     }
 }
 
@@ -107,10 +107,15 @@ void Farmer::sortMoles(std::vector<Vector2*> &deltas)
 
 void Farmer::move()
 {
+    attack();
+    if(goalLocation == nullptr)
+    {
+        return;
+    }
     Vector2 *delta;
     for(int i = 0; i < speed; ++i)
     {
-        delta = location->operator-(goalLocation);
+        delta = *location - *goalLocation;
         if(delta->getX() != 0 && delta->getY() == 0)
         {
             if(delta->getX() > 0)
@@ -154,9 +159,9 @@ void Farmer::move()
                 }
             }
         }
-        int sizeBefore = game->getMoles().size();
+        int sizeBefore = game->getCharacters().size();
         attack();
-        if(sizeBefore > game->getMoles().size())
+        if(sizeBefore > game->getCharacters().size())
         {
             break;
         }
@@ -173,4 +178,24 @@ void Farmer::attack()
         delete goalLocation;
         goalLocation = nullptr;
     }
+}
+
+Gender Farmer::getGender()
+{
+    return gender;
+}
+
+Status Farmer::getStatus()
+{
+    return status;
+}
+
+void Farmer::setGender(Gender gender)
+{
+    this->gender = gender;
+}
+
+void Farmer::setStatus(Status status)
+{
+    this->status = status;
 }

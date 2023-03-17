@@ -19,14 +19,14 @@ public:
     ~Vector2();
 
 public:
-    bool operator == (Vector2 *v1)
+    bool operator == (Vector2 &v1)
     {
-        return x == v1->x && y == v1->y;
+        return x == v1.x && y == v1.y;
     };
 
-    Vector2 *operator - (Vector2 *v1)
+    Vector2 *operator - (Vector2 &v1)
     {
-        return new Vector2(x - v1->x, y - v1->y);
+        return new Vector2(x - v1.x, y - v1.y);
     }
 
 public:

@@ -10,12 +10,6 @@
 
 class Game;
 
-//enum FarmerStatus
-//{
-//    Moving,
-//    AfterAttack
-//};
-
 class Farmer :public Character
 {
 public:
@@ -31,7 +25,7 @@ public:
     const int getHitRadius() const;
     void setHitRadius(const int hitRadius);
 
-    const Vector2 *getLocation();
+    Vector2 *getLocation() override;
     void setLocation(Vector2 *location);
 
     const Vector2 *getGoalLocation();
@@ -39,18 +33,26 @@ public:
 
     void sortMoles(std::vector<Vector2*> &deltas);
 
-    void execAction();
+    void execAction() override;
+
+    Gender getGender() override;
+    Status getStatus() override;
+
+    void setGender(Gender gender) override;
+    void setStatus(Status status) override;
 
 private:
     void findClosestMole();
-    void move() override;
-    void attack() override;
+    void move();
+    void attack();
 
 private:
     int speed;
     int hitRadius;
     Vector2 *location;
     Vector2 *goalLocation = nullptr;
+    Gender gender = Male;
+    Status status = OnTheGround;
 
     Game *game;
 };

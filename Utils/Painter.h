@@ -18,10 +18,10 @@ public:
     ~Painter();
 
 public:
-    void paint(GameField *gameField, Farmer *farmer, std::vector<Mole*> &moles);
+    void paint(GameField *gameField, std::vector<Character*> &characters);
 
 private:
-    void fillField(int **field, const Vector2 *size, Farmer *farmer, std::vector<Mole*> &moles);
+    void fillField(int **field, const Vector2 *size, std::vector<Character*> &characters);
 
 private:
     std::string **paintedField;

@@ -7,19 +7,6 @@
 #include "../../Game.h"
 
 
-enum MoleGender
-{
-    Male,
-    Female
-};
-
-enum MoleStatus
-{
-    OnTheGround,
-    UnderGround,
-    Attacked,
-    Rest
-};
 
 class Game;
 
@@ -27,7 +14,7 @@ class Mole :public Character
 {
 public:
     Mole() = default;
-    Mole(MoleGender gender, Vector2 *location, Game *game);
+    Mole(Gender gender, Vector2 *location, Game *game);
 
     ~Mole();
 
@@ -35,20 +22,20 @@ public:
     Vector2 *getLocation();
     void setLocation(Vector2 *location);
 
-    const MoleGender getGender() const;
-    void setGender(MoleGender gender);
+    Gender getGender() override;
+    Status getStatus() override;
 
-    MoleStatus getStatus();
-    void setStatus(MoleStatus status);
+    void setGender(Gender gender) override;
+    void setStatus(Status status) override;
 
     bool isUnderGround();
     bool isOnTheGround();
     bool isAttacked();
-    bool isMan();
-    bool isWoman();
+    bool isMale();
+    bool isFemale();
     bool isRest();
 
-    void execAction();
+    void execAction() override;
 private:
     Vector2* chooseTile();
     std::vector<Vector2*>& getTilesAround(std::vector<Vector2*> &tiles);
@@ -56,13 +43,13 @@ private:
     void filterTilesForAttack(std::vector<Vector2*> &tiles);
     void reProduct();
 
-    void move() override;
-    void attack() override;
+    void move();
+    void eat();
 
 private:
     Vector2 *location;
-    MoleGender gender;
-    MoleStatus status = UnderGround;
+    Gender gender;
+    Status status = Status::UnderGround;
     Game *game;
 };
 

@@ -4,7 +4,7 @@
 
 
 
-Mole::Mole(MoleGender gender, Vector2 *location, Game *game)
+Mole::Mole(Gender gender, Vector2 *location, Game *game)
 {
     this->gender = gender;
     this->location = location;
@@ -16,12 +16,12 @@ Mole::~Mole()
     delete location;
 }
 
-const MoleGender Mole::getGender() const
+Gender Mole::getGender()
 {
     return this->gender;
 }
 
-void Mole::setGender(MoleGender gender)
+void Mole::setGender(Gender gender)
 {
     this->gender = gender;
 }
@@ -36,32 +36,32 @@ void Mole::setLocation(Vector2 *location)
     this->location = location;
 }
 
-MoleStatus Mole::getStatus()
+Status Mole::getStatus()
 {
     return status;
 }
 
-void Mole::setStatus(MoleStatus status)
+void Mole::setStatus(Status status)
 {
     this->status = status;
 }
 
 void Mole::execAction()
 {
-    if(this->status == MoleStatus::Rest)
+    if(this->status == Status::Rest)
     {
         if(gender == Female)
         {
             game->createNewMole(location);
         }
-        status = MoleStatus::UnderGround;
+        status = Status::UnderGround;
     }
-    else if(this->status == MoleStatus::UnderGround)
+    else if(this->status == Status::UnderGround)
     {
         int var = game->getRandomer()->random(3);
         if(var == 0)
         {
-            this->status = MoleStatus::OnTheGround;
+            this->status = Status::OnTheGround;
         }
         else
         {
@@ -69,14 +69,14 @@ void Mole::execAction()
         }
         reProduct();
     }
-    else if(this->status == MoleStatus::OnTheGround)
+    else if(this->status == Status::OnTheGround)
     {
-        attack();
-        this->status = MoleStatus::Attacked;
+        eat();
+        this->status = Status::Attacked;
     }
-    else if(this->status == MoleStatus::Attacked)
+    else if(this->status == Status::Attacked)
     {
-       this->status = MoleStatus::UnderGround;
+       this->status = Status::UnderGround;
     }
 }
 
@@ -85,7 +85,7 @@ void Mole::move()
     location = chooseTile();
 }
 
-void Mole::attack()
+void Mole::eat()
 {
     if(game->getGameField()->tileIsAlive(*location))
     {
@@ -148,18 +148,20 @@ std::vector<Vector2*>& Mole::getTilesAround(std::vector<Vector2*> &tiles)
 
 void Mole::reProduct()
 {
-    if(gender == Female && status == UnderGround)
+    if(isFemale() && isUnderGround())
     {
-        for(int i = 0; i < game->getMoles().size(); ++i)
+        for(int i = 1; i < game->getCharacters().size(); ++i)
         {
-            if(this == game->getMoles()[i])
+            if(game->getCharacters()[i]->getGender() == Female && game->getCharacters()[i]->getLocation() == this->getLocation())
             {
                 continue;
             }
-            if(location->operator==(game->getMoles()[i]->location) && game->getMoles()[i]->isMan())
+            if(*location == *game->getCharacters()[i]->getLocation() &&
+               game->getCharacters()[i]->getGender() == Gender::Male &&
+               game->getCharacters()[i]->getStatus() == UnderGround)
             {
                 status = Rest;
-                game->getMoles()[i]->setStatus(Rest);
+                game->getCharacters()[i]->setStatus(Rest);
             }
         }
     }
@@ -167,32 +169,32 @@ void Mole::reProduct()
 
 bool Mole::isUnderGround()
 {
-    return status == MoleStatus::UnderGround;
+    return status == Status::UnderGround;
 }
 
 bool Mole::isOnTheGround()
 {
-    return status == MoleStatus::OnTheGround;
+    return status == Status::OnTheGround;
 }
 
 bool Mole::isAttacked()
 {
-    return status == MoleStatus::Attacked;
+    return status == Status::Attacked;
 }
 
-bool Mole::isMan()
+bool Mole::isMale()
 {
-    return gender == MoleGender::Male;
+    return gender == Gender::Male;
 }
 
-bool Mole::isWoman()
+bool Mole::isFemale()
 {
-    return gender == MoleGender::Female;
+    return gender == Gender::Female;
 }
 
 bool Mole::isRest()
 {
-    return status == MoleStatus::Rest;
+    return status == Status::Rest;
 }
 
 

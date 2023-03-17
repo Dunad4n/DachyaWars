@@ -24,11 +24,11 @@ Painter::~Painter()
     delete[] paintedField;
 }
 
-void Painter::paint(GameField *gameField, Farmer *farmer, std::vector<Mole*> &moles)
+void Painter::paint(GameField *gameField, std::vector<Character*> &characters)
 {
     int **field = gameField->getField();
     const Vector2 *size = gameField->getSize();
-    fillField(field, size, farmer, moles);
+    fillField(field, size, characters);
     std::cout << "--------------------------------------------------------------------------------" << std::endl;
     for(int i = 0; i < size->getX(); ++i)
     {
@@ -40,7 +40,7 @@ void Painter::paint(GameField *gameField, Farmer *farmer, std::vector<Mole*> &mo
     }
 }
 
-void Painter::fillField(int **field, const Vector2 *size, Farmer *farmer, std::vector<Mole *> &moles)
+void Painter::fillField(int **field, const Vector2 *size, std::vector<Character*> &characters)
 {
 
     for(int i = 0; i < size->getX(); ++i)
@@ -57,32 +57,33 @@ void Painter::fillField(int **field, const Vector2 *size, Farmer *farmer, std::v
             }
         }
     }
-    for(int i = 0; i < moles.size(); ++i)
+    for(int i = 1; i < characters.size(); ++i)
     {
-        if(moles[i]->isUnderGround())
+        if(characters[i]->getStatus() == UnderGround)
         {
-            paintedField[moles[i]->getLocation()->getX()][moles[i]->getLocation()->getY()] = "U";
+            paintedField[characters[i]->getLocation()->getX()][characters[i]->getLocation()->getY()] = "U";
         }
-        else if(moles[i]->isOnTheGround())
+        else if(characters[i]->getStatus() == OnTheGround)
         {
-            paintedField[moles[i]->getLocation()->getX()][moles[i]->getLocation()->getY()] = "M";
+            paintedField[characters[i]->getLocation()->getX()][characters[i]->getLocation()->getY()] = "M";
         }
-        else if(moles[i]->isAttacked())
+        else if(characters[i]->getStatus() == Attacked)
         {
-            paintedField[moles[i]->getLocation()->getX()][moles[i]->getLocation()->getY()] = "A";
+            paintedField[characters[i]->getLocation()->getX()][characters[i]->getLocation()->getY()] = "A";
         }
-        else if(moles[i]->isRest())
+        else if(characters[i]->getStatus() == Rest)
         {
-            paintedField[moles[i]->getLocation()->getX()][moles[i]->getLocation()->getY()] = "R";
+            paintedField[characters[i]->getLocation()->getX()][characters[i]->getLocation()->getY()] = "R";
         }
-        if(moles[i]->isMan())
+        if(characters[i]->getGender() == Male)
         {
-            paintedField[moles[i]->getLocation()->getX()][moles[i]->getLocation()->getY()] += "_M   ";
+            paintedField[characters[i]->getLocation()->getX()][characters[i]->getLocation()->getY()] += "_M   ";
         }
-        else if(moles[i]->isWoman())
+        else if(characters[i]->getGender() == Female)
         {
-            paintedField[moles[i]->getLocation()->getX()][moles[i]->getLocation()->getY()] += "_W   ";
+            paintedField[characters[i]->getLocation()->getX()][characters[i]->getLocation()->getY()] += "_W   ";
         }
+
     }
-    paintedField[farmer->getLocation()->getX()][farmer->getLocation()->getY()] = "FARM  ";
+    paintedField[characters[0]->getLocation()->getX()][characters[0]->getLocation()->getY()] = "FARM  ";
 }

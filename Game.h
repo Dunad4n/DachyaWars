@@ -22,7 +22,7 @@ class Game
 {
 public:
     Game();
-    Game(GameField *gameField, Farmer *farmer, std::vector<Mole*> moles);
+    Game(GameField *gameField, std::vector<Character*> characters);
 
     ~Game();
 public:
@@ -30,7 +30,7 @@ public:
 
     GameField* getGameField();
 
-    std::vector<Mole*> &getMoles();
+    std::vector<Character*> &getCharacters();
 
     Randomer* getRandomer();
 
@@ -48,8 +48,7 @@ private:
 
 private:
     GameField *gameField;
-    Farmer *farmer;
-    std::vector<Mole*> moles;
+    std::vector<Character*> characters;
     GameStage gameStage = GameStage::FarmerTurn;
     Randomer *randomer;
 };
